@@ -1,4 +1,4 @@
-
+<?php $estado = $_POST["estado"]; ?>
 <!doctype html>
 <html lang="es">
     <head>
@@ -21,31 +21,37 @@
                     <h1 class="text-center mb-4">Logueo</h1>
                     <div class="card">
                         <div class="card-body">
-                            <form name="formLogueo" action="Logueo.php" method="post">
+                            <form id="ingresar" name="formLogueo" action="../Controlador/Usuario.php" method="post">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
-                                    <input id="usuario" type="text" name="" class="form-control" placeholder="Username">
+                                    <input id="usuario" type="text" name="usuario" class="form-control" placeholder="Username">
                                     <div id="usu_vacio" class="invalid-feedback" style="display: none">
                                         Ingresar Usuario
                                     </div>
-                                    <div id="usu_invalido" class="invalid-feedback" style="display: none">
-                                        Ingresar Usuario valido
-                                    </div>
+                                    <?php if ($estado == "invalido") {
+                                        ?>
+                                        <div id="usu_invalido" class="invalid-feedback" style="display: block">
+                                            Ingresar Usuario valido
+                                        </div><?php }
+                                    ?>
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-key"></i></span>
                                     </div>
-                                    <input id="password" type="password" name="" class="form-control" placeholder="Password">
+                                    <input id="password" name="password" type="password" name="" class="form-control" placeholder="Password">
                                     <div id="pass_vacio" class="invalid-feedback" style="display: none">
                                         Ingresar contraseña
                                     </div>
-                                    <div id="pass_invalido" class="invalid-feedback" style="display: none">
-                                        Ingresar contraseña valida
-                                    </div>
+                                    <?php if ($estado == "invalido") {
+                                        ?>
+                                        <div id="pass_invalido" class="invalid-feedback" style="display: block">
+                                            Ingresar contraseña valida
+                                        </div><?php }
+                                    ?>
                                 </div>
 
                                 <div class="form-check mb-3">
@@ -63,6 +69,7 @@
                                         <a class="btn btn-block btn-link" href="#">¿Sete olvido la contraseña?</a>
                                     </div>
                                 </div>
+                                <input id="opc" name="opcion" type="hidden" value="validar">
                             </form>
                         </div>
                     </div>
@@ -70,14 +77,14 @@
             </div>
         </div>
 
-        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-3.5.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/datatables.min.js"></script>
         <script src="js/moment.min.js"></script>
         <script src="js/fullcalendar.min.js"></script>
         <script src="js/bootadmin.min.js"></script>
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118868344-1"></script>
+        
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -97,29 +104,33 @@
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
-                var usuario;
-                var password;
-                $("#btn_Enviar").click(function () {
-                    usuario = $("#usuario").val();
-                    password = $("#password").val();
-                    if (usuario !== "" && password !== "") {
+                var Usuario;
+                var Password;
+                function Validar() {
+
+                    Usuario = $("#usuario").val();
+                    Password = $("#password").val();
+                    if (Usuario !== "" && Password !== "") {
                         document.formLogueo.submit();
                     } else {
-                        if (usuario === "") {
+                        if (Usuario == "") {
                             document.getElementById('usuario').className = "form-control is-invalid";
                             document.getElementById('usu_vacio').style = "display:block";
-                        }else{
+                        } else {
                             document.getElementById('usuario').className = "form-control is-valid";
                             document.getElementById('usu_vacio').style = "display:none";
                         }
-                        if (password === "") {
+                        if (Password === "") {
                             document.getElementById('password').className = "form-control is-invalid";
                             document.getElementById('pass_vacio').style = "display:block";
-                        }else{
+                        } else {
                             document.getElementById('password').className = "form-control is-valid";
                             document.getElementById('pass_vacio').style = "display:none";
                         }
                     }
+                }
+                $("#btn_Enviar").click(function () {
+                    Validar();
                 });
             });
         </script>

@@ -1,19 +1,31 @@
 <?php
-
-require '../Controlador/Usuario.php';
+require '../Factory/Conexion.php';
 
 class UsuarioDAO {
 
     public function ValidarUsuario($Usuario, $Password) {
+        $ret = 0;
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
-        $result = $ConexionBD->query("SELECT count(*) as nro FROM USUARIO WHERE cod_usu=$Usuario and pass_usu=$Password;");
+        $result = $ConexionBD->query("SELECT count(*)as nro FROM usuario where Usuario='" . $Usuario . "' and Password='" . $Password . "' and Es_Usuario= 1;");
         while ($data = $result->fetch_object()) {
-            $nro = $data->nro;
-            if($nro !==0){
-                
-            }
+            $ret = $data->nro;
         }
+        return $ret;
+    }
+
+    public function SelectUsuariobyUsuPass($Usuario, $Password) {
+        $Conexion = new Conexion();
+        $ConexionBD = $Conexion->ConectarBD();
+        $result2 = $ConexionBD->query("call ListarLogueo('".$Usuario."','".$Password."')");
+        while ($data=$result2->fetch_object){?>
+        <script type="text/javascript" charset="utf-8">
+            alert(<?php echo $data->usuario ?>);
+        </script>
+        <?php
+        
+        }
+        return $result2;
     }
 
 }
