@@ -18,13 +18,6 @@ class UsuarioDAO {
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
         $result2 = $ConexionBD->query("call ListarLogueo('".$Usuario."','".$Password."')");
-        while ($data=$result2->fetch_object){?>
-        <script type="text/javascript" charset="utf-8">
-            alert(<?php echo $data->usuario ?>);
-        </script>
-        <?php
-        
-        }
         return $result2;
     }
 

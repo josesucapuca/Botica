@@ -8,13 +8,68 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css" >
         <link rel="stylesheet" href="css/datatables.min.css">
         <link rel="stylesheet" href="css/fullcalendar.min.css">
         <link rel="stylesheet" href="css/bootadmin.min.css">
         <title>Productos</title>
+        <style>
+
+            .aopcion{
+                color: white;   
+            }
+            .aopcion:hover{
+                text-decoration-line: none;
+                color: #34ce57;   
+            }
+            .portada{
+                background: url(img/pastillas.jpg) no-repeat fixed center;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                height: 100%;
+                width: 100% ;
+                text-align: center;
+                min-height: 300px;
+                max-height: 500px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+            }
+
+            .text{
+                margin: 30px 0px 30px 0px;	
+                padding: 10px;
+                background: rgba(0,0,0,0.5);
+                display: inline-block;
+            }
+            .oscu {
+                background-image: url(img/pastillas.jpg);
+
+
+                width: 550px; height: 200px;
+            }
+            .oscu:hover {
+                background-image: 
+                    linear-gradient(
+                    rgba(0, 0, 0, 0.5),
+                    rgba(0, 0, 0, 0.5)
+                    ),
+                    url(img/pastillas.jpg);
+                -webkit-filter: blur(0px);
+                -moz-filter: blur(0px);
+                -o-filter: blur(0px);
+                -ms-filter: blur(0px);
+                filter: blur(0px);
+            }
+            .btnopcion{
+                min-width: 100px;
+                max-width: 300px;
+            }
+        </style>
     </head>
-    <body class="bg-light">
+    <body class="bg-light" >
 
         <div class="d-flex">
 
@@ -23,68 +78,36 @@ session_start();
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="form-row">
-                            <div class="content col-md-6">
-                                <div class="card col-md-12 mb-3" style="padding: 0px;background-color: #63d48b;box-shadow: 0px 0px 9px black;">
-                                    <img class="card-img-top" src="img/pastillas.jpg" alt="Card image cap" >
-                                    <div class="card-body">
-                                        <div class="card mb-4">
-                                            <div class="card-header bg-white font-weight-bold">
-                                                Operciones de Productos
-                                            </div>
-                                            <div class="form-row" style="align-items: center">
-                                                <div class="card-body col-md-6 mb-3">
-                                                    <ul class="fa-ul mb-0">
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span><a href="#">Ingresar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span><a href="#">Modificar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="fas fa-spinner fa-pulse"></i></span><a href="#">Modificar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="far fa-square"></i></span><a href="#">Modificar Productos</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="card-body col-md-6 mb-3">
-                                                    <ul class="fa-ul mb-0">
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span>List icons can</li>
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span>be used to</li>
-                                                        <li><span class="fa-li"><i class="fas fa-spinner fa-pulse"></i></span>replace bullets</li>
-                                                        <li><span class="fa-li"><i class="far fa-square"></i></span>in lists</li>
-                                                    </ul>
-                                                </div>
+                            <div  class="content col-md-6">
+                                    <div class="card col-md-12 mb-3" style="padding: 0px">
+                                        <div class="portada" style="color: white">
+                                            <div class="text" style="width: 100%">
+                                                <h1><a href="CRUD_Productos.php" class="aopcion">Productos</a></h1> 
+                                                <h3><a href="CRUD_Productos.php" class="aopcion">Crea,Modifica o Desactiva Productos del </a></h3>
                                             </div>
                                         </div>
-                                        <div class="" style="display: flex;justify-content: center;">
-                                            <a href="#" class="btn btn-primary" style="">Listar Productos</a></div>
+
                                     </div>
+                                </div>
+                            <div class="content col-md-6">
+                                <div class="card col-md-12 mb-3" style="padding: 0px">
+                                    <div class="portada" style="color: white">
+                                        <div class="text" style="width: 100%">
+                                            <h1><a href="CRUD_Productos.php" class="aopcion">Categorias de Productos</a></h1> 
+                                            <h3><a href="CRUD_Productos.php" class="aopcion">Crea ,Modifica o Desactiva Categorias de los Productos</a>
+                                            </h3>
+                                        </div>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="content col-md-6">
-                                <div class="card col-md-12 mb-3" style="padding: 0px;background-color: #63d48b;box-shadow: 0px 0px 9px black;">
-                                    <img class="card-img-top" src="img/pastillas.jpg" alt="Card image cap" >
-                                    <div class="card-body">
-                                        <div class="card mb-4">
-                                            <div class="card-header bg-white font-weight-bold">
-                                                Operciones de Productos
-                                            </div>
-                                            <div class="form-row" style="align-items: center">
-                                                <div class="card-body col-md-6 mb-3">
-                                                    <ul class="fa-ul mb-0">
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span><a href="#">Ingresar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span><a href="#">Modificar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="fas fa-spinner fa-pulse"></i></span><a href="#">Modificar Productos</a></li>
-                                                        <li><span class="fa-li"><i class="far fa-square"></i></span><a href="#">Modificar Productos</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="card-body col-md-6 mb-3">
-                                                    <ul class="fa-ul mb-0">
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span>List icons can</li>
-                                                        <li><span class="fa-li"><i class="fas fa-check-square"></i></span>be used to</li>
-                                                        <li><span class="fa-li"><i class="fas fa-spinner fa-pulse"></i></span>replace bullets</li>
-                                                        <li><span class="fa-li"><i class="far fa-square"></i></span>in lists</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                <div class="card col-md-12 mb-3" style="padding: 0px">
+                                    <div class="portada" style="color: white">
+                                        <div class="text" style="width: 100%">
+                                            <h1><a href="CRUD_Productos.php" class="aopcion">Presentaciones de Productos de Productos</a></h1> 
+                                            <h3><a href="CRUD_Productos.php" class="aopcion">Crea ,Modifica o Desactiva el tipo de presentaciones de los Prodcutos</a></h3>
                                         </div>
-                                        <div class="" style="display: flex;justify-content: center;">
-                                            <a href="#" class="btn btn-primary" style="">Listar Productos</a></div>
-                                    </div>
+                                    </div>  
                                 </div>
                             </div>
 
