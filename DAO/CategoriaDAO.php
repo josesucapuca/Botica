@@ -1,13 +1,15 @@
 <?php
-require '../Factory/Conexion.php';
+
+include_once '../Factory/ConexionOperacion.php';
+
+//require_once '../Factory/Conexion.php';
 
 class CategoriaDAO {
 
     public function ListarCategoriaDAO() {
-        $Conexion = new Conexion();
-        $ConexionBD = $Conexion->ConectarBD();
-        $result2 = $ConexionBD->query("call ListarCategoria()");
+        $Conexion2 = new Conexion();
+        $ConexionBD = $Conexion2->ConectarBD();
+        $result2 = $ConexionBD->query("call ListaCategoria");
         return $result2;
     }
-
 }

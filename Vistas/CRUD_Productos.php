@@ -1,18 +1,13 @@
 <?php
-require '../DAO/ProductoDAO.php';
-/*require '../DAO/CategoriaDAO.php';
-require '../DAO/LocalDAO.php';
-require '../DAO/PresentacionDAO.php';*/
-require '../DAO/ProveedorDAO.php';
-$ProductoDAO = new ProductoDAO();
+require_once '../DAO/ProductoDAO.php';
 
-//$ProveedorDAOa = new ProveedorDAO();
+$ProductoDAO = new ProductoDAO();
 $val = $ProductoDAO->SelectProducto();
-//$Provee = $ProveedorDAOa->ListarProveedor();
 session_start();
+if ($_SESSION["Usuario"] !== null) {
 ?>
 <!doctype html>
-<html lang="en">
+<html >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,7 +21,7 @@ session_start();
         <title>Datatables | BootAdmin</title>
     </head>
     <body class="bg-light">
-        <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="ModalIngresarProducto" tabindex="-1" role="dialog" aria-labelledby="ModalIngresarProductoTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -37,6 +32,158 @@ session_start();
                     </div>
                     <div class="card-body modal-body">
                         <form id="FormIngresarProd" name="FormIngresarProducto" action="../Controlador/Producto.php">
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Producto</label>
+                                    <input name="Producto" type="text" class="form-control" id="Producto" placeholder="Producto" required="">
+                                    <div id="ProValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="ProInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Estado</label>
+                                    <select class="form-control " name="Estado_Producto" id="Estado" required="">
+                                        <option value="">Seleccionar</option>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Desativo</option>
+                                    </select>
+                                    <div id="EsValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="EsInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <input type="hidden" name="opc" value="IngresarProducto">
+                                <input type="hidden" name="Usuariocreacion" value="<?php echo $_SESSION["id_Usuario"]; ?>">
+                               
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Categoria</label>
+                                    <select class="form-control " name="Categoria" id="Categoria" required="">
+                                        <option value="">Seleccionar</option>
+
+
+                                    </select>
+                                    <div id="CatValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="CatInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Presentacion</label>
+                                    <select class="form-control " name="Presentacion" id="Presentacion" required="">
+                                        <option value="">Seleccionar</option>
+
+
+                                    </select>
+                                    <div id="PresValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="PresInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Local</label>
+                                    <select class="form-control " name="Local" id="Local" required="">
+                                        <option value="">Seleccionar</option>
+
+                                    </select>
+                                    <div id="LocValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="LocInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer01">Proveedor</label>
+                                    <select class="form-control " name=Proveedor id="Proveedor" required="">
+                                        <option value="">Seleccionar</option>
+
+
+                                    </select>
+                                    <div id="ProvValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="ProvInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer04">Precio de Compra</label>
+                                    <input name="PrecioCompra" type="text" class="form-control" id="PrecioCompra" placeholder="0.0" required>
+                                    <div id="PCValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="PCInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer05">Precio de  Venta Producto</label>
+                                    <input name="PrecioVenta" type="text" class="form-control" id="PrecioVenta" placeholder="0.0" required>
+                                    <div id="PVValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="PVInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer04">Precio de Pres. Compra</label>
+                                    <input name="PrecioCompraPresentacion" type="text" class="form-control" id="PrecioPresCompra" placeholder="0.0" required>
+                                    <div id="PPCValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="PPCInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer05">Precio de Pres. Venta</label>
+                                    <input name="PrecioVentaPresentacion" type="text" class="form-control" id="PrecioPresVenta" placeholder="0.0" required>
+                                    <div id="PPVValid" class="valid-feedback" style="display: none">
+                                        Valido
+                                    </div>
+                                    <div id="PPVInValid" class="invalid-feedback" style="display: none">
+                                        Invalido
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="btn_Enviar" type="button" class="btn btn-success">Agregar Producto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bd-example-modal-lg" id="ModalModificarProducto" tabindex="-1" role="dialog" aria-labelledby="ModalModificarProductoTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modificar Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body modal-body">
+                        <form id="FormModificarProd" name="FormIngresarProducto" action="../Controlador/Producto.php">
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Producto</label>
@@ -79,9 +226,9 @@ session_start();
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Categoria</label>
-                                    <select class="form-control " name="Categoria" id="Categoria" required="">
+                                    <select class="form-control " name="Categoria" id="CategoriaMod" required="">
                                         <option value="">Seleccionar</option>
-                                        <option value="1">---</option>
+
 
                                     </select>
                                     <div id="CatValid" class="valid-feedback" style="display: none">
@@ -93,9 +240,9 @@ session_start();
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Presentacion</label>
-                                    <select class="form-control " name="Presentacion" id="Presentacion" required="">
+                                    <select class="form-control " name="Presentacion" id="PresentacionMod" required="">
                                         <option value="">Seleccionar</option>
-                                        <option value="">---</option>
+
 
                                     </select>
                                     <div id="PresValid" class="valid-feedback" style="display: none">
@@ -110,9 +257,9 @@ session_start();
 
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Local</label>
-                                    <select class="form-control " name="Local" id="Local" required="">
+                                    <select class="form-control " name="Local" id="LocalMod" required="">
                                         <option value="">Seleccionar</option>
-                                        <option value="">---</option>
+
                                     </select>
                                     <div id="LocValid" class="valid-feedback" style="display: none">
                                         Valido
@@ -123,13 +270,9 @@ session_start();
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Proveedor</label>
-                                    <select class="form-control " name=Proveedor id="Proveedor" required="">
+                                    <select class="form-control " name=Proveedor id="ProveedorMod" required="">
                                         <option value="">Seleccionar</option>
-                                        <?php
-                                        //while ($dataProv = $Prov->fetch_object()) {
-                                            ?>
-                                            <option value="<?php //echo $dataProv->id_Proveedor ?>"><?php// echo $dataProv->No_Proveedor?></option>
-                                        <?php //}?>
+
 
                                     </select>
                                     <div id="ProvValid" class="valid-feedback" style="display: none">
@@ -224,7 +367,7 @@ session_start();
 
                 <div class="card mb-4">
                     <div class="content">
-                        <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#exampleModalCenter">Ingresar Nuevo Producto</button>
+                        <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#ModalIngresarProducto">Ingresar Nuevo Producto</button>
                     </div>
                     <div class="card-body">
                         <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 2px #b9bbbe">
@@ -286,7 +429,7 @@ session_start();
                                             }
                                             ?></td>
                                         <td>
-                                            <a href="#" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                            <button onclick="<?php echo $dataproducto->id_Producto ?>" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
                                             <?php
                                             if ($dataproducto->Es_Producto == 1) {
                                                 ?>
@@ -337,6 +480,7 @@ session_start();
         <script src="js/moment.min.js"></script>
         <script src="js/fullcalendar.min.js"></script>
         <script src="js/bootadmin.min.js"></script>
+        <script src="js/Producto/producto.js"></script>
         <script>
             $(document).ready(function () {
                 $('#example').DataTable();
@@ -364,163 +508,134 @@ session_start();
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#btn_Enviar").click(function () {
-                    ValidarFormLogueo();
-                    /*$.ajax({
-                     type: "POST",
-                     url: '../Controlador/Producto.php',
-                     data: $("#FormIngresarProd").serialize(),
-                     success: function (response)
-                     {
-                     var jsonData = JSON.parse(response);
-                     
-                     // user is logged in successfully in the back-end
-                     // let's redirect
-                     if (jsonData[0] == "1")
-                     {
-                     alert();
-                     // ListarProducto();
-                     //location.href = 'my_profile.php';
-                     }
-                     
-                     }
-                     });*/
+                    Validara();
                 });
-                function ValidarFormLogueo() {
-                    var Prod = $("#Producto");
-                    var Est = $("#Estado");
-                    var Cat = $("#Categoria");
-                    var Pres = $("#Presentacion");
-                    var Loc = $("#Local");
-                    var Prov = $("#Proveedor");
-                    var PreC = $("#PrecioCompra");
-                    var PreV = $("#PrecioVenta");
-                    var PrePreC = $("#PrecioPresCompra");
-                    var PrePreV = $("#PrecioPresVenta");
-                    if (Prod.val() !== "" &&
-                            Est.val() !== "" &&
-                            Cat.val() !== "" &&
-                            Pres.val() !== "" &&
-                            Loc.val() !== "" &&
-                            Prov.val() !== "" &&
-                            PreC.val() !== "" &&
-                            PreV.val() !== "" &&
-                            PrePreC.val() !== "" &&
-                            PrePreV.val() !== "") {
 
-                    } else {
-                        if (Prod.val() !== "") {
-                            document.getElementById("Producto").className = "form-control is-valid";
-                            document.getElementById("ProValid").style = "display:block;";
-                            document.getElementById("ProInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Producto").className = "form-control is-invalid";
-                            document.getElementById("ProValid").style = "display:none;";
-                            document.getElementById("ProInValid").style = "display:block;";
-                        }
-                        if (Est.val() !== "") {
-                            document.getElementById("Estado").className = "form-control is-valid";
-                            document.getElementById("EsValid").style = "display:block;";
-                            document.getElementById("EsInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Estado").className = "form-control is-invalid";
-                            document.getElementById("EsValid").style = "display:none;";
-                            document.getElementById("EsInValid").style = "display:block;";
-                        }
-                        if (Cat.val() !== "") {
-                            document.getElementById("Categoria").className = "form-control is-valid";
-                            document.getElementById("CatValid").style = "display:block;";
-                            document.getElementById("CatInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Categoria").className = "form-control is-invalid";
-                            document.getElementById("CatValid").style = "display:none;";
-                            document.getElementById("CatInValid").style = "display:block;";
-                        }
-                        if (Pres.val() !== "") {
-                            document.getElementById("Presentacion").className = "form-control is-valid";
-                            document.getElementById("PresValid").style = "display:block;";
-                            document.getElementById("PresInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Presentacion").className = "form-control is-invalid";
-                            document.getElementById("PresValid").style = "display:none;";
-                            document.getElementById("PresInValid").style = "display:block;";
-                        }
-                        if (Loc.val() !== "") {
-                            document.getElementById("Local").className = "form-control is-valid";
-                            document.getElementById("LocValid").style = "display:block;";
-                            document.getElementById("LocInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Local").className = "form-control is-invalid";
-                            document.getElementById("LocValid").style = "display:none;";
-                            document.getElementById("LocInValid").style = "display:block;";
-                        }
-                        if (Prov.val() !== "") {
-                            document.getElementById("Proveedor").className = "form-control is-valid";
-                            document.getElementById("ProvValid").style = "display:block;";
-                            document.getElementById("ProvInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("Proveedor").className = "form-control is-invalid";
-                            document.getElementById("ProvValid").style = "display:none;";
-                            document.getElementById("ProvInValid").style = "display:block;";
-                        }
-                        if (PreC.val() !== "") {
-                            document.getElementById("PrecioCompra").className = "form-control is-valid";
-                            document.getElementById("PCValid").style = "display:block;";
-                            document.getElementById("PCInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("PrecioCompra").className = "form-control is-invalid";
-                            document.getElementById("PCValid").style = "display:none;";
-                            document.getElementById("PCInValid").style = "display:block;";
-                        }
-                        if (PreV.val() !== "") {
-                            document.getElementById("PrecioVenta").className = "form-control is-valid";
-                            document.getElementById("PVValid").style = "display:block;";
-                            document.getElementById("PVInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("PrecioVenta").className = "form-control is-invalid";
-                            document.getElementById("PVValid").style = "display:none;";
-                            document.getElementById("PVInValid").style = "display:block;";
-                        }
-                        if (PrePreC.val() !== "") {
-                            document.getElementById("PrecioPresCompra").className = "form-control is-valid";
-                            document.getElementById("PPCValid").style = "display:block;";
-                            document.getElementById("PPCInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("PrecioPresCompra").className = "form-control is-invalid";
-                            document.getElementById("PPCValid").style = "display:none;";
-                            document.getElementById("PPCInValid").style = "display:block;";
-                        }
-                        if (PrePreV.val() !== "") {
-                            document.getElementById("PrecioPresVenta").className = "form-control is-valid";
-                            document.getElementById("PPVValid").style = "display:block;";
-                            document.getElementById("PPVInValid").style = "display:none;";
-                        } else {
-                            document.getElementById("PrecioPresVenta").className = "form-control is-invalid";
-                            document.getElementById("PPVValid").style = "display:none;";
-                            document.getElementById("PPVInValid").style = "display:block;";
-                        }
-                    }
 
-                }
-                function ListarProducto() {
-                    $.ajax({
-                        type: "POST",
-                        url: '../Controlador/Producto.php',
-                        data: {opc: "ListarProducto"},
-                        success: function (response)
-                        {
-                            var jsonData = JSON.parse(response);
-
-                            // user is logged in successfully in the back-end
-                            // let's redirect
-                            if (jsonData[0] === "1")
-                            {
-                                location.href = 'my_profile.php';
-                            }
-
-                        }
-                    });
-                }
             });
+            function Validara() {
+                var Prod = $("#Producto");
+                var Est = $("#Estado");
+                var Cat = $("#Categoria");
+                var Pres = $("#Presentacion");
+                var Loc = $("#Local");
+                var Prov = $("#Proveedor");
+                var PreC = $("#PrecioCompra");
+                var PreV = $("#PrecioVenta");
+                var PrePreC = $("#PrecioPresCompra");
+                var PrePreV = $("#PrecioPresVenta");
+                if (Prod.val() !== "" &&
+                        Est.val() !== "" &&
+                        Cat.val() !== "" &&
+                        Pres.val() !== "" &&
+                        Loc.val() !== "" &&
+                        Prov.val() !== "" &&
+                        PreC.val() !== "" &&
+                        PreV.val() !== "" &&
+                        PrePreC.val() !== "" &&
+                        PrePreV.val() !== "") {
+                    InsertarProducto();
+                } else {
+                    if (Prod.val() !== "") {
+                        document.getElementById("Producto").className = "form-control is-valid";
+                        document.getElementById("ProValid").style = "display:block;";
+                        document.getElementById("ProInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Producto").className = "form-control is-invalid";
+                        document.getElementById("ProValid").style = "display:none;";
+                        document.getElementById("ProInValid").style = "display:block;";
+                    }
+                    if (Est.val() !== "") {
+                        document.getElementById("Estado").className = "form-control is-valid";
+                        document.getElementById("EsValid").style = "display:block;";
+                        document.getElementById("EsInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Estado").className = "form-control is-invalid";
+                        document.getElementById("EsValid").style = "display:none;";
+                        document.getElementById("EsInValid").style = "display:block;";
+                    }
+                    if (Cat.val() !== "") {
+                        document.getElementById("Categoria").className = "form-control is-valid";
+                        document.getElementById("CatValid").style = "display:block;";
+                        document.getElementById("CatInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Categoria").className = "form-control is-invalid";
+                        document.getElementById("CatValid").style = "display:none;";
+                        document.getElementById("CatInValid").style = "display:block;";
+                    }
+                    if (Pres.val() !== "") {
+                        document.getElementById("Presentacion").className = "form-control is-valid";
+                        document.getElementById("PresValid").style = "display:block;";
+                        document.getElementById("PresInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Presentacion").className = "form-control is-invalid";
+                        document.getElementById("PresValid").style = "display:none;";
+                        document.getElementById("PresInValid").style = "display:block;";
+                    }
+                    if (Loc.val() !== "") {
+                        document.getElementById("Local").className = "form-control is-valid";
+                        document.getElementById("LocValid").style = "display:block;";
+                        document.getElementById("LocInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Local").className = "form-control is-invalid";
+                        document.getElementById("LocValid").style = "display:none;";
+                        document.getElementById("LocInValid").style = "display:block;";
+                    }
+                    if (Prov.val() !== "") {
+                        document.getElementById("Proveedor").className = "form-control is-valid";
+                        document.getElementById("ProvValid").style = "display:block;";
+                        document.getElementById("ProvInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("Proveedor").className = "form-control is-invalid";
+                        document.getElementById("ProvValid").style = "display:none;";
+                        document.getElementById("ProvInValid").style = "display:block;";
+                    }
+                    if (PreC.val() !== "") {
+                        document.getElementById("PrecioCompra").className = "form-control is-valid";
+                        document.getElementById("PCValid").style = "display:block;";
+                        document.getElementById("PCInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("PrecioCompra").className = "form-control is-invalid";
+                        document.getElementById("PCValid").style = "display:none;";
+                        document.getElementById("PCInValid").style = "display:block;";
+                    }
+                    if (PreV.val() !== "") {
+                        document.getElementById("PrecioVenta").className = "form-control is-valid";
+                        document.getElementById("PVValid").style = "display:block;";
+                        document.getElementById("PVInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("PrecioVenta").className = "form-control is-invalid";
+                        document.getElementById("PVValid").style = "display:none;";
+                        document.getElementById("PVInValid").style = "display:block;";
+                    }
+                    if (PrePreC.val() !== "") {
+                        document.getElementById("PrecioPresCompra").className = "form-control is-valid";
+                        document.getElementById("PPCValid").style = "display:block;";
+                        document.getElementById("PPCInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("PrecioPresCompra").className = "form-control is-invalid";
+                        document.getElementById("PPCValid").style = "display:none;";
+                        document.getElementById("PPCInValid").style = "display:block;";
+                    }
+                    if (PrePreV.val() !== "") {
+                        document.getElementById("PrecioPresVenta").className = "form-control is-valid";
+                        document.getElementById("PPVValid").style = "display:block;";
+                        document.getElementById("PPVInValid").style = "display:none;";
+                    } else {
+                        document.getElementById("PrecioPresVenta").className = "form-control is-invalid";
+                        document.getElementById("PPVValid").style = "display:none;";
+                        document.getElementById("PPVInValid").style = "display:block;";
+                    }
+                }
+
+            }
         </script>
     </body>
 </html>
+<?php
+}else{
+    ?><script type="text/javascript">
+    location.href="VistaLogueo.php"
+    </script><?php
+}
+?>

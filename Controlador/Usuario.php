@@ -1,4 +1,4 @@
-<form id="sd" action="../Vistas/Inicio.php" name="vote" method="post" style="display:none;"><input type="text" name="estado" value="invalido" /></form>
+<form id="sd" action="../Vistas/Logueo.php" name="vote" method="post" style="display:none;"><input type="text" name="estado" value="invalido" /></form>
     <?php
     require '../DAO/UsuarioDAO.php';
     $opcion = $_POST["opcion"];

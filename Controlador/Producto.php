@@ -1,35 +1,56 @@
 <?php
 
-require '../DAO/ProductoDAO.php';
+include_once "../Factory/ConexionOperacion.php";
 $opcion = $_POST["opc"];
-$Producto = $_POST["Producto"];
-$Es_Producto = $_POST["Estado_Producto"];
-$usu_Creacion = $_POST["password"];
-$id_Presentacion = $_POST["Presentacion"];
-$id_Categoria = $_POST["Categoria"];
-$id_Local = $_POST["Local"];
-$id_Proveedor = $_POST["Proveedor"];
-$Precio_Compra = $_POST["PrecioCompra"];
-$Precio_Venta = $_POST["PrecioVenta"];
-$Precio_Compra_Presentacion = $_POST["PrecioCompraPresentacion"];
-$Precio_Venta_Presentacion = $_POST["PrecioVentaPresentacion"];
-$productoDAO = new ProductoDAO();
-if ($opcion === "IngresarUsuario") {
-    $num = 0;
-    $var = $productoDAO->InsertProducto($Producto, $Es_Producto, $usu_Creacion, $id_Presentacion, $id_Categoria, $id_Local, $id_Proveedor, $Precio_Compra, $Precio_Venta, $Precio_Compra_Presentacion, $Precio_Venta_Presentacion);
-    $res = ingres_fetch_array($var);
-    echo json_encode($res);
+
+if ($opcion === "IngresarProducto") {
+    echo 'asa';
+    $Producto = $_POST["Producto"];
+    $Estado = $_POST["Estado"];
+    $Categoria= $_POST["Categoria"];
+    $Presentacion = $_POST["Presentacion"];
+    $Local = $_POST["Local"];
+    $Proveedor = $_POST["Proveedor"];
+    $PrecioCompra = $_POST["PrecioCompra"];
+    $PrecioVenta = $_POST["PrecioVenta"];
+    $PrecioCompraPresentacion = $_POST["PrecioCompraPresentacion"];
+    $PrecioVentaPresentacion = $_POST["PrecioVentaPresentacion"];
+    $UsuarioCreacion = $_POST["Usuariocreacion"];
+    $consultda = " call  InsertarProducto('$Producto','$Estado',$UsuarioCreacion,$Presentacion,$Categoria,$Local,$Proveedor,$PrecioCompra,$PrecioVenta,$PrecioCompraPresentacion,$PrecioVentaPresentacion)";
+    $var = mysqli_query($conexion, $consultda);
+    echo json_encode($var);
 }
-if ($opcion === "ModificarUsuario") {
-    $num = 0;
-    $var = $productoDAO->InsertProducto($Producto, $Es_Producto, $usu_Creacion, $id_Presentacion, $id_Categoria, $id_Local, $id_Proveedor, $Precio_Compra, $Precio_Venta, $Precio_Compra_Presentacion, $Precio_Venta_Presentacion);
-    $res = ingres_fetch_array($var);
-    echo json_encode($res);
+if ($opcion === "ListarCategoria") {
+    $consultda = "call ListaCategoria;";
+    $var = mysqli_query($conexion, $consultda);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    echo json_encode($arr);
 }
-if ($opcion === "ListarProducto") {
-    $num = 0;
-    $var = $productoDAO->SelectProducto();
-    $res = ingres_fetch_array($var);
-    echo json_encode($res);
+if ($opcion === "ListarCategoriabyid") {
+    $Catid = $_POST["id"];
+    $consultda = "call ListaCategoriabyId($Catid);";
+    $var = mysqli_query($conexion, $consultda);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    echo json_encode($arr);
 }
-?>
+if ($opcion === "ModificarCat") {
+    //echo 'asa';
+    $ModCatid = $_POST["id_Cat"];
+    $ModCategoria = $_POST["ModCategoria"];
+    $ModEstadoCategoria = $_POST["ModEstado_Categoria"];
+    $ModUsuMod = $_POST["UsuarioModificacion"];
+    $consultda = "call ModificarCategoria('$ModCategoria','$ModEstadoCategoria',$ModUsuMod,$ModCatid);";
+    $var = mysqli_query($conexion, $consultda);
+    echo json_encode($var);
+}
+mysqli_close($conexion);

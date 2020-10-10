@@ -1,12 +1,12 @@
 <?php
-require '../Factory/Conexion.php';
+require_once '../Factory/Conexion.php';
 
 class LocalDAO {
 
-    public function ListarLocalDAO() {
+    public function ListarLocal() {
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
-        $result2 = $ConexionBD->query("call ListarLocal()");
+        $result2 = $ConexionBD->query("call ListaLocal;");
         return $result2;
     }
 
