@@ -1,8 +1,5 @@
 <?php
-
-include_once '../Factory/ConexionOperacion.php';
-
-//require_once '../Factory/Conexion.php';
+require_once '../Factory/Conexion.php';
 
 class CategoriaDAO {
 

@@ -4,10 +4,9 @@ include_once "../Factory/ConexionOperacion.php";
 $opcion = $_POST["opc"];
 
 if ($opcion === "IngresarProducto") {
-    echo 'asa';
     $Producto = $_POST["Producto"];
     $Estado = $_POST["Estado"];
-    $Categoria= $_POST["Categoria"];
+    $Categoria = $_POST["Categoria"];
     $Presentacion = $_POST["Presentacion"];
     $Local = $_POST["Local"];
     $Proveedor = $_POST["Proveedor"];
@@ -20,8 +19,9 @@ if ($opcion === "IngresarProducto") {
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }
-if ($opcion === "ListarCategoria") {
-    $consultda = "call ListaCategoria;";
+if ($opcion === "ListarProductobyid") {
+    $Prodid = $_POST["id_Prd"];
+    $consultda = "call ListaProductobyId($Prodid);";
     $var = mysqli_query($conexion, $consultda);
     $arr = array();
     if (mysqli_num_rows($var) != 0) {
@@ -31,25 +31,39 @@ if ($opcion === "ListarCategoria") {
     }
     echo json_encode($arr);
 }
-if ($opcion === "ListarCategoriabyid") {
-    $Catid = $_POST["id"];
-    $consultda = "call ListaCategoriabyId($Catid);";
+if ($opcion === "ModificarProducto") {    //echo 'asa';
+    $Producto = $_POST["ProductoMod"];
+    $Estado = $_POST["Estado_ProductoMod"];
+    $id_Producto = $_POST["idProducto"];
+    $Categoria = $_POST["CategoriaMod"];
+    $Presentacion = $_POST["PresentacionMod"];
+    $Local = $_POST["LocalMod"];
+    $Proveedor = $_POST["ProveedorMod"];
+    $PrecioCompra = $_POST["PrecioCompraMod"];
+    $PrecioVenta = $_POST["PrecioVentaMod"];
+    $PrecioCompraPresentacion = $_POST["PrecioCompraPresentacionMod"];
+    $PrecioVentaPresentacion = $_POST["PrecioVentaPresentacionMod"];
+    $UsuarioModificacion = $_POST["UsuarioModificacion"];
+    $consultda = " call  ModificarProducto($id_Producto,'$Producto','$Estado',"
+            . "$UsuarioModificacion,$Presentacion,$PrecioCompra,$PrecioVenta"
+            . ",$PrecioCompraPresentacion,$PrecioVentaPresentacion,$Local,$Proveedor,$Categoria)";
     $var = mysqli_query($conexion, $consultda);
-    $arr = array();
-    if (mysqli_num_rows($var) != 0) {
-        while ($row = mysqli_fetch_assoc($var)) {
-            $arr[] = $row;
-        }
-    }
-    echo json_encode($arr);
+    //echo ($consultda);
+    echo json_encode($var);
 }
-if ($opcion === "ModificarCat") {
+if ($opcion === "ActivarProducto") {
     //echo 'asa';
-    $ModCatid = $_POST["id_Cat"];
-    $ModCategoria = $_POST["ModCategoria"];
-    $ModEstadoCategoria = $_POST["ModEstado_Categoria"];
-    $ModUsuMod = $_POST["UsuarioModificacion"];
-    $consultda = "call ModificarCategoria('$ModCategoria','$ModEstadoCategoria',$ModUsuMod,$ModCatid);";
+    $id_Producto = $_POST["id_Producto"];
+    $id_Usuario = $_POST["id_Usuario"];
+    $consultda = "call ActivarProducto($id_Usuario,$id_Producto);";
+    $var = mysqli_query($conexion, $consultda);
+    echo json_encode($var);
+}
+if ($opcion === "DesactivarProducto") {
+    //echo 'asa';
+    $id_Producto = $_POST["id_Producto"];
+    $id_Usuario = $_POST["id_Usuario"];
+    $consultda = "call DesactivarProducto($id_Usuario,$id_Producto);";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }

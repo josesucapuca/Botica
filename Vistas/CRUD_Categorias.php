@@ -1,16 +1,10 @@
 <?php
-require_once '../DAO/ProductoDAO.php';
-require_once '../DAO/ProveedorDAO.php';
-require_once '../DAO/PresentacionDAO.php';
 require_once '../DAO/CategoriaDAO.php';
-require_once '../DAO/LocalDAO.php';
-
 $CategoriaDAO = new CategoriaDAO();
-
 $Cat2 = $CategoriaDAO->ListarCategoriaDAO();
 
-
 session_start();
+if ($_SESSION["Usuario"] !== null) {
 ?>
 <!doctype html>
 <html>
@@ -90,7 +84,7 @@ session_start();
                     </div>
                     <div class="modal-footer">
                         <button id="closemod" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="btn_Enviar" type="button" class="btn btn-success">Agregar Cateogria</button>
+                        <button  id="btn_Enviar" type="button" class="btn btn-success">Agregar Cateogria</button>
                     </div>
                 </div>
             </div>
@@ -99,7 +93,7 @@ session_start();
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Ingresar Categoria</h5>
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modificar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -168,8 +162,8 @@ session_start();
                         <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#ModalIngresarCategoria">Ingresar Nuevo Categoria</button>
                     </div>
                     <div class="card-body">
-                        <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 2px #b9bbbe">
-                            <thead>
+                        <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: 1px solid rgb(144 144 144);width: 100%;border-radius: 10px;">
+                            <thead >
                                 <tr>
                                     <th style="max-width: 30px;text-align: top;">Cod. <br>Cat</th>
                                     <th>Categoria</th>
@@ -228,11 +222,11 @@ session_start();
                                             <?php
                                             if ($datacategor->Es_Categoria == 1) {
                                                 ?>
-                                                <button onclick="DesactivarCategoria(<?php echo $datacategor->id_Categoria ?>)" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></button>
+                                                <button onclick="DesactivarCategoria(<?php echo $datacategor->id_Categoria ?>,<?php echo $_SESSION["id_Usuario"]; ?>)" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash-alt"></i></button>
                                                 <?php
                                             } else {
                                                 ?>
-                                                <button onclick="ActivarCategoria(<?php echo $datacategor->id_Categoria ?>)" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-check"></i></button>
+                                                <button onclick="ActivarCategoria(<?php echo $datacategor->id_Categoria ?>,<?php echo $_SESSION["id_Usuario"]; ?>)" class="btn btn-icon btn-pill btn-success" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-check"></i></button>
                                                     <?php
                                                 }
                                                 ?>
@@ -263,7 +257,7 @@ session_start();
                                                     }
 
         </script>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function () {
                 $('#example').DataTable();
             });
@@ -287,6 +281,16 @@ session_start();
                 enable_page_level_ads: true
             });
         </script>
+        <script type="text/javascript">
+
+        </script>
 
     </body>
 </html>
+    <?php
+} else {
+    ?><script type="text/javascript">
+        location.href = "VistaLogueo.php"
+    </script><?php
+}
+?>

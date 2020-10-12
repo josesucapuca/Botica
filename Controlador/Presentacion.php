@@ -1,13 +1,13 @@
 <?php
 
 include_once "../Factory/ConexionOperacion.php";
-$opcion = $_POST["opcPresentacion"];
+$opcion = $_POST["opc"];
 
 if ($opcion === "IngresarPresentacion") {
-    $Categoria = $_POST["Categoria"];
-    $Estado_Categoria = $_POST["Estado_Categoria"];
+    $Presentacion = $_POST["Presentacion"];
+    $Estado_Presentacion = $_POST["Estado_Presentacion"];
     $Usuariocreacion = $_POST["Usuariocreacion"];
-    $consultda = " call InsertarCategoria('$Categoria','$Estado_Categoria',$Usuariocreacion)";
+    $consultda = " call InsertarPresentracion('$Presentacion','$Estado_Presentacion',$Usuariocreacion)";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }
@@ -23,21 +23,46 @@ if ($opcion === "ListarPresentacion") {
     echo json_encode($arr);
 }
 if ($opcion === "ListarPresentacionbyid") {
-    $Catid = $_POST["id"];
-    $consultda = "call ListaCategoriabyId($Catid);";
+    
+    $Preid = $_POST["id"];
+    $consultda = "call ListaPresentacionById($Preid);";
     $var = mysqli_query($conexion, $consultda);
-    $data = $var->fetch_object();
-    echo json_encode($data);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    
+    echo json_encode($arr);
 }
-if ($opcion === "ModificarPre") {
+if ($opcion === "ModificarPresentacion") {
     //echo 'asa';
-    $ModCatid = $_POST["id_Cat"];
-    $ModCategoria = $_POST["ModCategoria"];
-    $ModEstadoCategoria = $_POST["ModEstado_Categoria"];
+    $ModidPresentacion = $_POST["id_Pre"];
+    $ModPresentacion = $_POST["ModPresentacion"];
+    $ModEstadoPresentacion = $_POST["ModEstado_Presentacion"];
     $ModUsuMod = $_POST["UsuarioModificacion"];
-    $consultda = "call ModificarCategoria('$ModCategoria','$ModEstadoCategoria',$ModUsuMod,$ModCatid);";
+    $consultda = "call ModificarPresentacion($ModidPresentacion,'$ModPresentacion','$ModEstadoPresentacion',$ModUsuMod);";
+    $var = mysqli_query($conexion, $consultda);
+    //echo $consultda;
+    echo json_encode($var);
+}
+if ($opcion === "ActivarPresentacion") {
+    //echo 'asa';
+    $ModCatid = $_POST["idPre"];
+    $UsuMod = $_POST["id_UM"];
+    $consultda = "call ActivarPresentacion($ModCatid,$UsuMod);";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
+}
+if ($opcion === "DesactivarPresentacion") {
+    //echo 'asa';
+    $ModPreid = $_POST["idPre"];
+    $UsuMod = $_POST["id_UM"];
+    $consultda = "call DesactivarPresentacion($ModPreid,$UsuMod);";
+    $var = mysqli_query($conexion, $consultda);
+    echo json_encode($var);
+    echo $consultda;
 }
 mysqli_close($conexion);
 
