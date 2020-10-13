@@ -148,7 +148,7 @@ if ($_SESSION["Usuario"] !== null) {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button id="closemod" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="closemod" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button  id="btn_Enviar" type="button" class="btn btn-success">Agregar Proveedor</button>
                         </div>
                     </div>
@@ -272,8 +272,31 @@ if ($_SESSION["Usuario"] !== null) {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button id="btn_Enviar_Mod" type="button" class="btn btn-success">Modificar Cateogria</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="ModalInformacionProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Datos de Creacion y Modificación</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover" style="border: solid 2px #b9bbbe">
+                                <tr><td><strong>Usuario Creacion</strong></td><td id="Usu_Creacion">as</td></tr>
+                                <tr><td><strong>Empleado que Creacion</strong></td><td id="Empleado_Creacion">sa</td></tr>
+                                <tr><td><strong>Usuario de <br>Ultima Modificación</strong></td><td id="Usu_Mod">sa</td></tr>
+                                <tr><td><strong>Empleado de <br>Ultima Modificación</strong></td><td id="Empleado_Mod">sa</td></tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -301,10 +324,7 @@ if ($_SESSION["Usuario"] !== null) {
                                         <th>Distrito</th>
                                         <th>Local</th>
                                         <th>Estado</th>
-                                        <th>Usuario<br> Crea.</th>
-                                        <th>Empleado<br> Crea.</th>
-                                        <th>Usuario Ult.<br> Mod.</th>
-                                        <th>Empleado Ult.<br> Mod.</th>
+                                        <th>Mas Detalles</th>
                                         <th class="actions">Opciones</th>
                                     </tr>
                                 </thead>
@@ -346,27 +366,7 @@ if ($_SESSION["Usuario"] !== null) {
                                                 }
                                                 ?>
                                             </td>
-                                            <?php
-                                            if ($dataProveedor->Usu_Creacion === " " || $dataProveedor->Usu_Creacion === NULL) {
-                                                echo "<td>---</td>";
-                                                echo "<td>---</td>";
-                                            } else {
-                                                echo "<td>" . $dataProveedor->Usuario_Creacion . "</td>";
-                                                echo "<td>" . $dataProveedor->Empleado_Creacion . "</td>";
-                                            }
-                                            ?>
-
-                                            <?php
-                                            if ($dataProveedor->Usu_Modificacion === null || $dataProveedor->Usu_Modificacion === " ") {
-                                                echo "<td>---</td>";
-                                                echo "<td>---</td>";
-                                            } else {
-
-                                                echo "<td>" . $dataProveedor->Usuario_Modificacion . "</td>";
-                                                echo "<td>" . $dataProveedor->Empleado_Modificacion . "</td>";
-                                            }
-                                            ?>
-
+                                           
                                             <td>
                                                 <button onclick="enviar(<?php echo  $dataProveedor->id_Proveedor ?>)" class="btn btn-icon btn-pill btn-primary" data-toggle="modal" data-target="#ModalModificarProveedor" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
                                                 <?php
@@ -380,6 +380,8 @@ if ($_SESSION["Usuario"] !== null) {
                                                         <?php
                                                     }
                                                     ?>
+                                            </td>
+                                            <td><button onclick="DatProvee(<?php echo $dataProveedor->id_Proveedor ?>)"  class="btn btn-icon btn-pill btn-danger" data-toggle="modal" data-target="#ModalInformacionProducto" style="color: white"><i class="fa fa-fw fa-list"></i></button>
                                             </td>
                                         </tr>
                                         <?php

@@ -43,57 +43,66 @@ if ($_SESSION["Usuario"] !== null) {
                         <img src="img/1.png" >
                     </div>
                     <ul class="list-unstyled">
+
                         <li><a href="Principal.php"><i class="fa fa-fw fa-tachometer-alt"></i> Pagina de Inicio</a>
                         </li>
-                        <li><a href="#Productos" data-toggle="collapse"><i class="fa fa-cubes"></i> Productos</a>
-                            <ul id="Productos" class="list-unstyled collapse">
-                                <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Productos</a></li>
-                                <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Categorías de Productos</a></li>
-                                <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Presentacion de Productos</a></li>
-                                <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Proveedor de Productos</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#MantStock" data-toggle="collapse"><i class="fa fa-cubes"></i> Mantenimiento de Stock</a>
-                            <ul id="MantStock" class="list-unstyled collapse">
-                                <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Sock</a></li>
-                                <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> Stock por Vencer</a></li>
-                                <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Presentacion de Productos</a></li>
-                                <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Proveedor de Productos</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-archway"></i> Locales</a></li>
+                        <?php
+                        if ($_SESSION["Nivel_Usuario"] === '1') {
+                            ?>
+                            <li><a href="#Productos" data-toggle="collapse"><i class="fa fa-cubes"></i> Productos</a>
+                                <ul id="Productos" class="list-unstyled collapse">
+                                    <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Productos</a></li>
+                                    <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Categorías de Productos</a></li>
+                                    <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Presentacion de Productos</a></li>
+                                    <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Proveedor de Productos</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-cubes"></i> Mantenimiento de Stock</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-archway"></i> Locales</a></li>
+                            <?php
+                        }
+                        ?>
                         <li><a href="#"><i class="fa fa-users-cog"></i> Clientes </a></li>
-                        <li ><a href="#TalHumano" data-toggle="collapse"><i class="fa fa-user-check"></i> Talento Humnao</a>
-                            <ul id="TalHumano" class="list-unstyled collapse">
-                                <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Empleados</a></li>
-                                <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Usuario</a></li>
-                            </ul>
-                        </li>
-                        <li ><a href="#TabSec" data-toggle="collapse"><i class="fa fa-table"></i> Tablas Secundarias</a>
-                            <ul id="TabSec" class="list-unstyled collapse">
-                                <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Distritos</a></li>
-                                <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Usuarios</a></li>
-                                <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Presentacion de Productos</a></li>
-                                <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Proveedor de Productos</a></li>
-                            </ul>
-                        </li>
+                        <?php
+                        if ($_SESSION["Nivel_Usuario"] === '1') {
+                            ?>
+                            <li><a href="#TalHumano" data-toggle="collapse"><i class="fa fa-user-check"></i> Talento Humnao</a>
+                                <ul id="TalHumano" class="list-unstyled collapse">
+                                    <li><a href="CRUD_Empleados.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Empleados</a></li>
+                                    <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Manteniento de Usuarios</a></li>
+                                </ul>
+                            </li>
+                            <li ><a href="#TabSec" data-toggle="collapse"><i class="fa fa-table"></i> Tablas Secundarias</a>
+                                <ul id="TabSec" class="list-unstyled collapse">
+                                    <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Distritos</a></li>
+                                    <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Usuarios</a></li>
+                                    <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Presentacion de Productos</a></li>
+                                    <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> CRUD de Proveedor de Productos</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a href="#sm_examples" data-toggle="collapse">
-                                <i class="fa fa-fw fa-clipboard-list"></i> Reportes
-                            </a>
-                            <ul id="sm_examples" class="list-unstyled collapse">
-                                <li><a href="" target="myframe"> <i class="fa fa-angle-double-right"></i> Modificaciones por Usuarios</a></li>
-                                <li><a href="" target="myframe"><i class="fa fa-angle-double-right"></i> Ventas por Fecha</a></li>
-                                <li><a href="" target="myframe"><i class="fa fa-angle-double-right"></i> Compras por Fecha</a></li>
+                            <li>
+                                <a href="#sm_examples" data-toggle="collapse">
+                                    <i class="fa fa-fw fa-clipboard-list"></i> Reportes
+                                </a>
+                                <ul id="sm_examples" class="list-unstyled collapse">
+                                    <li><a href="" target="myframe"> <i class="fa fa-angle-double-right"></i> Modificaciones por Usuarios</a></li>
+                                    <li><a href="" target="myframe"><i class="fa fa-angle-double-right"></i> Ventas por Fecha</a></li>
+                                    <li><a href="" target="myframe"><i class="fa fa-angle-double-right"></i> Compras por Fecha</a></li>
 
-                            </ul>
-                        </li>
-
+                                </ul>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        <li><a href="#"><i class="fa fa-archway"></i> Generar Compra </a></li>
+                        <li><a href="#"><i class="fa fa-archway"></i> Generar Venta </a></li>
+                        <li><a href="#"><i class="fa fa-archway"></i> Ver Stock de Productos </a></li>
                     </ul>
                 </div>
 
-                <div class="content p-4">
+                <div class="content p-4" style="    padding: 0px !important;">
                     <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  style="background-color: #002752" src="Inicio.php"></iframe>
 
                 </div>
@@ -113,7 +122,7 @@ if ($_SESSION["Usuario"] !== null) {
     ?>
     <script type="text/javascript">
 
-            location.href = "VistaLogueo.php"
+        location.href = "VistaLogueo.php"
 
     </script>
     <?php

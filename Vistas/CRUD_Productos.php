@@ -124,7 +124,7 @@ if ($_SESSION["Usuario"] !== null) {
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
-                                        <label for="validationServer04">Precio de Compra</label>
+                                        <label for="validationServer04">Precio de Compra de Producto</label>
                                         <input name="PrecioCompra" type="number" step="any" class="form-control" id="PrecioCompra" placeholder="0.0" required>
                                         <div id="PCValid" class="valid-feedback" style="display: none">
                                             Valido

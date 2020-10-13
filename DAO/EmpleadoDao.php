@@ -6,7 +6,7 @@ class EmpleadoDAO {
     public function ListarEmpleado() {
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
-        $result2 = $ConexionBD->query("call ;");
+        $result2 = $ConexionBD->query("call ListaEmpleado;");
         return $result2;
     }
 
