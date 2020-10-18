@@ -5,9 +5,10 @@ $opcion = $_POST["opc"];
 
 if ($opcion === "IngresarPresentacion") {
     $Presentacion = $_POST["Presentacion"];
+    $id_Emp = $_POST["id_Emp"];
     $Estado_Presentacion = $_POST["Estado_Presentacion"];
     $Usuariocreacion = $_POST["Usuariocreacion"];
-    $consultda = " call InsertarPresentracion('$Presentacion','$Estado_Presentacion',$Usuariocreacion)";
+    $consultda = " call InsertarPresentracion('$Presentacion','$Estado_Presentacion',$Usuariocreacion,$id_Emp)";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }

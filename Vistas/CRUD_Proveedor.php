@@ -1,10 +1,8 @@
 <?php
 require_once '../DAO/ProveedorDAO.php';
 $ProveedorDAO = new ProveedorDAO();
-$Proveedor = $ProveedorDAO->SelectProveedor();
-
-
 session_start();
+$Proveedor = $ProveedorDAO->SelectProveedor($_SESSION["id_Empresa"]);
 if ($_SESSION["Usuario"] !== null) {
     ?>
     <!doctype html>
@@ -316,7 +314,7 @@ if ($_SESSION["Usuario"] !== null) {
                             <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 1px #b9bbbe;width: 100%;border-radius: 10px;">
                                 <thead>
                                     <tr>
-                                        <th style="max-width: 30px;text-align: top;">Cod. <br>Pres</th>
+                                        <th style="max-width: 30px;text-align: top;">Nro.</th>
                                         <th>Proveedor</th>
                                         <th>Telefono</th>
                                         <th>Celular</th>
@@ -330,7 +328,9 @@ if ($_SESSION["Usuario"] !== null) {
                                 </thead>
                                 <tbody >
                                     <?php
+                                    $i=0;
                                     while ($dataProveedor = $Proveedor->fetch_object()) {
+                                        $i++;
                                         ?>
                                         <tr class="<?php
                                         if ($dataProveedor->Es_Proveedor === "1") {
@@ -339,7 +339,7 @@ if ($_SESSION["Usuario"] !== null) {
                                             echo "alert alert-danger";
                                         }
                                         ?>">
-                                            <td ><?php echo $dataProveedor->id_Proveedor ?></td>
+                                            <td ><?php echo $i ?></td>
                                             <td><?php echo $dataProveedor->No_Proveedor ?></td>
                                             <td><?php echo $dataProveedor->Tel_Proveedor ?></td>
                                             <td><?php echo $dataProveedor->Cel_Proveedor ?></td>
@@ -412,6 +412,7 @@ if ($_SESSION["Usuario"] !== null) {
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('#example').DataTable();
+                    ListarLocal(<?php echo $_SESSION["id_Empresa"]?>);
                 });
             </script>
 

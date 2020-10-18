@@ -1,4 +1,4 @@
-ListarLocal();
+
 ListarDistrito();
 $("#btn_Enviar").click(function () {
 
@@ -18,11 +18,11 @@ $('#iProveedorMod').keypress(function (e) {
         ModificarPro();
     }
 });
-function ListarLocal() {
+function ListarLocal(id) {
     $.ajax({
         type: "POST",
         url: '../Controlador/Local.php',
-        data: {opc: "ListarLocal"},
+        data: {opc: "ListarLocalByEmpresa",id:id},
         success: function (response)
         {
             if (response === null || response === "") {

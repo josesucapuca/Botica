@@ -6,9 +6,8 @@
 
 $(document).ready(function () {
     ListarCategoria();
-    ListarLocal();
     ListarPresentacion();
-    ListarProveedor();
+    
     $("#btn_Modificar").click(function () {
         ModificarProducto();
     });
@@ -68,11 +67,11 @@ function ListarPresentacion() {
         }
     });
 }
-function ListarLocal() {
+function ListarLocal(id) {
     $.ajax({
         type: "POST",
         url: '../Controlador/Local.php',
-        data: {opc: "ListarLocal"},
+        data: {opc: "ListarLocalByEmpresa",id:id},
         success: function (response)
         {
             if (response === null || response === "") {
@@ -94,11 +93,11 @@ function ListarLocal() {
         }
     });
 }
-function ListarProveedor() {
+function ListarProveedor(id) {
     $.ajax({
         type: "POST",
         url: '../Controlador/Proveedor.php',
-        data: {opc: "ListarProveedor"},
+        data: {opc: "ListarProveedorByIdEmpresa",id:id},
         success: function (response)
         {
             if (response === null || response === "") {

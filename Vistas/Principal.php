@@ -70,7 +70,7 @@ if ($_SESSION["Usuario"] !== null) {
                             <li><a href="#TalHumano" data-toggle="collapse"><i class="fa fa-user-check"></i> Talento Humnao</a>
                                 <ul id="TalHumano" class="list-unstyled collapse">
                                     <li><a href="CRUD_Empleados.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Empleados</a></li>
-                                    <li><a href="CRUD_Productos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Manteniento de Usuarios</a></li>
+                                    <li><a href="CRUD_Usuario_Empresa.php" target="myframe"><i class="fa fa-angle-double-right"></i> Manteniento de Usuarios</a></li>
                                 </ul>
                             </li>
                             <li ><a href="#TabSec" data-toggle="collapse"><i class="fa fa-table"></i> Tablas Secundarias</a>
@@ -103,7 +103,7 @@ if ($_SESSION["Usuario"] !== null) {
                 </div>
 
                 <div class="content p-4" style="    padding: 0px !important;">
-                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  style="background-color: #002752" src="Inicio.php"></iframe>
+                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800px" frameborder="0"  style="background-color: #002752" src="Inicio.php"></iframe>
 
                 </div>
             </div>

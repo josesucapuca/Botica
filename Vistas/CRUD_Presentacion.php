@@ -1,10 +1,9 @@
 <?php
 require_once '../DAO/PresentacionDAO.php';
-$PresentacionDAO = new PresentacionDAO();
-$Presentacion = $PresentacionDAO->ListarPresentacionDAO();
-
-
 session_start();
+$PresentacionDAO = new PresentacionDAO();
+$Presentacion = $PresentacionDAO->ListarPresentacionDAO($_SESSION["id_Empresa"]);
+
 if ($_SESSION["Usuario"] !== null) {
 ?>
 <!doctype html>
@@ -40,7 +39,7 @@ if ($_SESSION["Usuario"] !== null) {
                         </button>
                     </div>
                     <div class="card-body modal-body">
-                        <form id="FormIngresarPre" name="FormIngresarProducto" >
+                        <form id="FormIngresarPre" name="FormIngresarPre" >
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer01">Presentacion</label>
@@ -67,6 +66,7 @@ if ($_SESSION["Usuario"] !== null) {
                                     </div>
                                 </div>
                                 <input type="hidden" name="opc" value="IngresarPresentacion">
+                                <input type="hidden" name="id_Emp" value="<?php echo $_SESSION["id_Empresa"]; ?>">
                                 <input type="hidden" name="Usuariocreacion" value="<?php echo $_SESSION["id_Usuario"]; ?>">
                                 <!--<div class="col-md-6 mb-3">
                                     <div style="height: 20px"></div>
@@ -166,7 +166,7 @@ if ($_SESSION["Usuario"] !== null) {
                         <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 1px #b9bbbe;width: 100%;border-radius: 10px;">
                             <thead>
                                 <tr>
-                                    <th style="max-width: 30px;text-align: top;">Cod. <br>Pres</th>
+                                    <th style="max-width: 30px;text-align: top;">Nro.</th>
                                     <th>Presentacion</th>
                                     <th>Estado Presentacion</th>
                                     <th>Usuario Crea.</th>
@@ -178,7 +178,9 @@ if ($_SESSION["Usuario"] !== null) {
                             </thead>
                             <tbody >
                                 <?php
+                                $i=0;
                                 while ($dataPresentacion = $Presentacion->fetch_object()) {
+                                    $i++;
                                     ?>
                                     <tr class="<?php
                                     if ($dataPresentacion->Es_Presentacion === "1") {
@@ -187,7 +189,7 @@ if ($_SESSION["Usuario"] !== null) {
                                         echo "alert alert-danger";
                                     }
                                     ?>">
-                                        <td ><?php echo $dataPresentacion->id_Presentacion ?></td>
+                                        <td ><?php echo $i ?></td>
                                         <td><?php echo $dataPresentacion->No_Presentacion ?></td>
                                         <td><?php
                                             if ($dataPresentacion->Es_Presentacion === "1") {

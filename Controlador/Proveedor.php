@@ -19,6 +19,18 @@ if ($opcion === "ListarProveedor") {
     }
     echo json_encode($arr);
 }
+if ($opcion === "ListarProveedorByIdEmpresa") {
+    $id_Emp=$_POST["id"];
+    $consultda = "call ListaProveedorByEmpresa($id_Emp);";
+    $var = mysqli_query($conexion, $consultda);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    echo json_encode($arr);
+}
 if ($opcion === "IngresarProveedor") {
     $Proveedor = $_POST["Proveedor"];
     $Es_Proveedor = $_POST["Estado_Proveedor"];

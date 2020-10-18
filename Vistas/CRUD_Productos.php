@@ -1,13 +1,13 @@
 <?php
 require_once '../DAO/ProductoDAO.php';
-
-$ProductoDAO = new ProductoDAO();
-$val = $ProductoDAO->SelectProducto();
 session_start();
+$ProductoDAO = new ProductoDAO();
+$id_Empresa=$_SESSION["id_Empresa"];
+$val = $ProductoDAO->SelectProducto($id_Empresa);
 if ($_SESSION["Usuario"] !== null) {
     ?>
     <!doctype html>
-    <html >
+    <html>
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -374,14 +374,14 @@ if ($_SESSION["Usuario"] !== null) {
                             <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 1px #b9bbbe;width: 100%;border-radius: 10px;">
                                 <thead>
                                     <tr>
-                                        <th style="max-width: 30px;text-align: top;">Cod. <br>Prod</th>
+                                        <th style="max-width: 30px;text-align: top;">Nro.</th>
                                         <th>Producto</th>
                                         <th>Categoría</th>
                                         <th>Presentación</th>
-                                        <th>Prec. <br>Unit Com</th>
-                                        <th>Prec. <br>Unit Ven</th>
-                                        <th>Prec. <br>Pres Com</th>
-                                        <th>Prec. <br>Pres Ven</th>
+                                        <th>Precio <br>Unit Com</th>
+                                        <th>Precio <br>Unit Ven</th>
+                                        <th>Precio <br>Pres Com</th>
+                                        <th>Precio <br>Pres Ven</th>
                                         <th>Local</th>
                                         <th>Proveedor</th>
                                         <th>Estado</th>
@@ -391,10 +391,12 @@ if ($_SESSION["Usuario"] !== null) {
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $i=0;
                                     while ($dataproducto = $val->fetch_object()) {
+                                        $i++; 
                                         ?>
                                         <tr>
-                                            <td ><?php echo $dataproducto->id_Producto ?></td>
+                                            <td><?php echo $i ?></td>
                                             <td><?php echo $dataproducto->No_Producto ?></td>
                                             <?php if ($dataproducto->Es_Categoria === "1") { ?>
                                                 <td class="alert alert-success" ><?php echo $dataproducto->No_Categoria ?></td>
@@ -472,31 +474,34 @@ if ($_SESSION["Usuario"] !== null) {
             <script src="js/bootadmin.min.js"></script>
             <script src="js/Producto/producto.js"></script>
             <script>
-                                                $(document).ready(function () {
-                                                    $('#example').DataTable();
-                                                });
+                                            $(document).ready(function () {
+                                                $('#example').DataTable();
+                                            });
             </script>
 
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118868344-1"></script>
             <script>
-                                                window.dataLayer = window.dataLayer || [];
-                                                function gtag() {
-                                                    dataLayer.push(arguments);
-                                                }
-                                                gtag('js', new Date());
+                                            window.dataLayer = window.dataLayer || [];
+                                            function gtag() {
+                                                dataLayer.push(arguments);
+                                            }
+                                            gtag('js', new Date());
 
-                                                gtag('config', 'UA-118868344-1');
+                                            gtag('config', 'UA-118868344-1');
             </script>
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
-                                                (adsbygoogle = window.adsbygoogle || []).push({
-                                                    google_ad_client: "ca-pub-4097235499795154",
-                                                    enable_page_level_ads: true
-                                                });
+                                            (adsbygoogle = window.adsbygoogle || []).push({
+                                                google_ad_client: "ca-pub-4097235499795154",
+                                                enable_page_level_ads: true
+                                            });
             </script>
+            
             <script type="text/javascript">
                 $(document).ready(function () {
+                    ListarLocal(<?php echo $_SESSION["id_Empresa"] ?>);
+                    ListarProveedor(<?php echo $_SESSION["id_Empresa"] ?>);
                     $("#btn_Enviar").click(function () {
                         Validara();
                     });
@@ -625,7 +630,7 @@ if ($_SESSION["Usuario"] !== null) {
     <?php
 } else {
     ?><script type="text/javascript">
-        location.href = "VistaLogueo.php"
+            location.href = "VistaLogueo.php"
     </script><?php
 }
 ?>

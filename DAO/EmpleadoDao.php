@@ -3,10 +3,10 @@ require_once '../Factory/Conexion.php';
 
 class EmpleadoDAO {
 
-    public function ListarEmpleado() {
+    public function ListarEmpleado($idEm) {
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
-        $result2 = $ConexionBD->query("call ListaEmpleado;");
+        $result2 = mysqli_query($ConexionBD,"call ListaEmpleadoByEmpresa($idEm);");
         return $result2;
     }
 

@@ -1,9 +1,9 @@
 <?php
 require_once '../DAO/CategoriaDAO.php';
-$CategoriaDAO = new CategoriaDAO();
-$Cat2 = $CategoriaDAO->ListarCategoriaDAO();
-
 session_start();
+$CategoriaDAO = new CategoriaDAO();
+$Cat2 = $CategoriaDAO->ListarCategoriaDAO($_SESSION["id_Empresa"]);
+
 if ($_SESSION["Usuario"] !== null) {
 ?>
 <!doctype html>
@@ -165,7 +165,7 @@ if ($_SESSION["Usuario"] !== null) {
                         <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: 1px solid rgb(144 144 144);width: 100%;border-radius: 10px;">
                             <thead >
                                 <tr>
-                                    <th style="max-width: 30px;text-align: top;">Cod. <br>Cat</th>
+                                    <th style="max-width: 30px;text-align: top;">Nro.</th>
                                     <th>Categoria</th>
                                     <th>Estado Categoria</th>
                                     <th>Usuario Crea.</th>
@@ -177,7 +177,9 @@ if ($_SESSION["Usuario"] !== null) {
                             </thead>
                             <tbody id="ListCategorias">
                                 <?php
+                                $i=0;
                                 while ($datacategor = $Cat2->fetch_object()) {
+                                    $i++;
                                     ?>
                                     <tr class="<?php
                                     if ($datacategor->Es_Categoria === "1") {
@@ -186,7 +188,7 @@ if ($_SESSION["Usuario"] !== null) {
                                         echo "alert alert-danger";
                                     }
                                     ?>">
-                                        <td ><?php echo $datacategor->id_Categoria ?></td>
+                                        <td ><?php echo $i ?></td>
                                         <td><?php echo $datacategor->No_Categoria ?></td>
                                         <td><?php
                                             if ($datacategor->Es_Categoria === "1") {

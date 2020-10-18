@@ -32,6 +32,18 @@ if ($opcion === "ListarLocal") {
     }
     echo json_encode($arr);
 }
+if ($opcion === "ListarLocalByEmpresa") {
+    $id_Empresa=$_POST["id"];
+    $consultda = "call ListaLocalByIdEmpresa($id_Empresa);";
+    $var = mysqli_query($conexion, $consultda);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    echo json_encode($arr);
+}
 
 mysqli_close($conexion);
 

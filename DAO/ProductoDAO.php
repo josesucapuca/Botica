@@ -4,14 +4,13 @@ require_once '../Factory/Conexion.php';
 
 class ProductoDAO {
 
-
-
-    public function SelectProducto() {
+    public function SelectProducto($id_Empresa) {
         $Conexion = new Conexion();
         $ConexionBD = $Conexion->ConectarBD();
-        $result = $ConexionBD->query("call ListaProductos;");
+        $result = mysqli_query($ConexionBD, "call ListaProductoByEmpresa($id_Empresa);");
         return $result;
     }
+
 }
 
 /*

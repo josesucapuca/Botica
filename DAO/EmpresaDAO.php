@@ -5,7 +5,7 @@ class EmpresaDAO{
     function ListarEmpresa(){
         $Conexion= new Conexion();
         $ConexionBD=$Conexion->ConectarBD();
-        $var=$ConexionBD->query("call ListaEmpresa;");
+        $var=mysqli_query($ConexionBD, "call ListaEmpresa;");
         return $var;
     }
     
