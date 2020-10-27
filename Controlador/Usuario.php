@@ -4,40 +4,36 @@ include_once "../Factory/ConexionOperacion.php";
 $opcion = $_POST["opc"];
 
 if ($opcion === "IngresarUsuario") {
-    $NombreEmpleado = $_POST["NombreEmpleado"];
-    $ApellidoEmpleado = $_POST["ApellidoEmpleado"];
-    $CargoEmpleado = $_POST["CargoEmpleado"];
-    $EstadoEmpleado = $_POST["EstadoEmpleado"];
-    $EdadEmpleado = $_POST["EdadEmpleado"];
-    $DireccionEmpleado = $_POST["DireccionEmpleado"];
-    $TelefonoEmpleado = $_POST["TelefonoEmpleado"];
-    $CelularEmpleado = $_POST["CelularEmpleado"];
-    $LocalEmpleado = $_POST["LocalEmpleado"];
-    $DistritoEmpleado = $_POST["DistritoEmpleado"];
-    $FechaIngreso = $_POST["FechaIngreso"];
-    $ClaveEmpleado = $_POST["ClaveEmpleado"];
-    $SexoEmpleado = $_POST["SexoEmpleado"];
-    $Usuariocreacion = $_POST["Usuariocreacion"];
-    $consultda = " call InsertarEmpleado('$NombreEmpleado',"
-            . "'$ApellidoEmpleado',"
-            . "'$DireccionEmpleado',"
-            . "'$CargoEmpleado',"
-            . "'$EdadEmpleado',"
-            . "'$TelefonoEmpleado',"
-            . "'$CelularEmpleado',"
-            . "'$FechaIngreso',"
-            . "'$EstadoEmpleado',"
-            . "$Usuariocreacion,"
-            . "$LocalEmpleado,"
-            . "$DistritoEmpleado,"
-            . "'$ClaveEmpleado',"
-            . "'$SexoEmpleado')";
-    echo '$consultda';
+    $Usuario = $_POST["Usuario"];
+    $id_Empleado = $_POST["id_Empleado"];
+    $password = $_POST["password"];
+    $correo = $_POST["correo"];
+    $Estado = $_POST["Estado"];
+    $Nivel = $_POST["Nivel"];
+    $UsuarioCreacion = $_POST["UsuarioCreacion"];
+    $consultda = "";
+    if ($correo === "") {
+        $consultda = " call InsertarUsuario('$Usuario',"
+                . "'$password',"
+                . "'$Nivel',"
+                . "'$Estado',"
+                . "null,"
+                . "$id_Empleado,"
+                . "$UsuarioCreacion)";
+    } else {
+        $consultda = " call InsertarUsuario('$Usuario',"
+                . "'$password',"
+                . "'$Nivel',"
+                . "'$Estado',"
+                . "'$correo',"
+                . "$id_Empleado,"
+                . "$UsuarioCreacion)";
+    }
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }
 if ($opcion === "ListarEmpleado") {
-    $id_Emp=$_POST["id"];
+    $id_Emp = $_POST["id"];
     $consultda = "call ListaEmpleadoByEmpresa($id_Emp);";
     $var = mysqli_query($conexion, $consultda);
     $arr = array();
@@ -50,8 +46,8 @@ if ($opcion === "ListarEmpleado") {
 }
 if ($opcion === "ListarUsuarioById") {
 
-    $EmpUs = $_POST["id"];
-    $consultda = "call ListarUsuarioById($EmpUs);";
+    $id_Usu = $_POST["id"];
+    $consultda = "call ListaUsuarioById($id_Usu);";
     $var = mysqli_query($conexion, $consultda);
     $arr = array();
     if (mysqli_num_rows($var) != 0) {
@@ -63,58 +59,38 @@ if ($opcion === "ListarUsuarioById") {
 }
 if ($opcion === "ModificarUsuario") {
     //echo 'asa';
-    $EmpId = $_POST["id_Emp"];
-    $NombreEmpleado = $_POST["NombreEmpleadoMod"];
-    $ApellidoEmpleado = $_POST["ApellidoEmpleadoMod"];
-    $CargoEmpleado = $_POST["CargoEmpleadoMod"];
-    $EstadoEmpleado = $_POST["EstadoEmpleadoMod"];
-    $EdadEmpleado = $_POST["EdadEmpleadoMod"];
-    $DireccionEmpleado = $_POST["DireccionEmpleadoMod"];
-    $TelefonoEmpleado = $_POST["TelefonoEmpleadoMod"];
-    $CelularEmpleado = $_POST["CelularEmpleadoMod"];
-    $LocalEmpleado = $_POST["LocalEmpleadoMod"];
-    $DistritoEmpleado = $_POST["DistritoEmpleadoMod"];
-    $FechaIngreso = $_POST["FechaIngresoMod"];
-    $ClaveEmpleado = $_POST["ClaveEmpleadoMod"];
-    $SexoEmpleado = $_POST["SexoEmpleadoMod"];
-    $FechaSalida=$_POST["FechaSalidaMod"];
+    $id_Usuario = $_POST["id_Usuario"];
+    $UsuarioMod = $_POST["UsuarioMod"];
+    $passwordMod = $_POST["passwordMod"];
+    $correoMod = $_POST["correoMod"];
+    $EstadoMod = $_POST["EstadoMod"];
+    $NivelMod = $_POST["NivelMod"];
     $UsuarioModificacion = $_POST["UsuarioModificacion"];
-    $consulta = " call ModificarEmpleado('$NombreEmpleado',"
-            . "'$ApellidoEmpleado',"
-            . "'$DireccionEmpleado',"
-            . "'$CargoEmpleado',"
-            . "'$EdadEmpleado',"
-            . "'$TelefonoEmpleado',"
-            . "'$CelularEmpleado',"
-            . "'$FechaIngreso',"
-            . "'$EstadoEmpleado',"
-            . "$UsuarioModificacion,"
-            . "$LocalEmpleado,"
-            . "$DistritoEmpleado,"
-            . "'$ClaveEmpleado',"
-            . "'$SexoEmpleado',"
-            . "$EmpId,"
-            . "'$FechaSalida')";
+    $consulta = " call ModificarUsuario($id_Usuario,"
+            . "'$UsuarioMod',"
+            . "'$passwordMod',"
+            . "'$NivelMod',"
+            . "'$EstadoMod',"
+            . "'$correoMod',"
+            . "$UsuarioModificacion)";
     $var = mysqli_query($conexion, $consulta);
     //echo $consultda;
     echo json_encode($var);
 }
 if ($opcion === "ActivarUsuario") {
     //echo 'asa';
-    $ModEmpid = $_POST["id"];
+    $ModUsu = $_POST["id"];
     $UsuMod = $_POST["id_UM"];
-    $consultda = "call ActivarEmpleado($ModEmpid,$UsuMod);";
+    $consultda = "call ActivarUsuario($ModUsu,$UsuMod);";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }
 if ($opcion === "DesactivarUsuario") {
-    //echo 'asa';
-    $ModEmpid = $_POST["id"];
+    $ModUsu = $_POST["id"];
     $UsuMod = $_POST["id_UM"];
-    $consultda = "call DesactivarEmpleado($ModEmpid,$UsuMod);";
+    $consultda = "call DesactivarUsuario($ModUsu,$UsuMod);";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
-    echo $consultda;
 }
 mysqli_close($conexion);
 

@@ -1,5 +1,5 @@
 <?php
-require '../Factory/Conexion.php';
+require_once '../Factory/Conexion.php';
 class EmpresaDAO{
     
     function ListarEmpresa(){

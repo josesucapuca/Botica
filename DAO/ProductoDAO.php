@@ -10,6 +10,18 @@ class ProductoDAO {
         $result = mysqli_query($ConexionBD, "call ListaProductoByEmpresa($id_Empresa);");
         return $result;
     }
+    public function ListaProductosEliminados($id_Empresa) {
+        $Conexion = new Conexion();
+        $ConexionBD = $Conexion->ConectarBD();
+        $result = mysqli_query($ConexionBD, "call ListaProductoEliminado ($id_Empresa);");
+        return $result;
+    }
+    public function ListaProductoProcCompByEmpresa($id_Empresa) {
+        $Conexion = new Conexion();
+        $ConexionBD = $Conexion->ConectarBD();
+        $result = mysqli_query($ConexionBD, "call ListaProductoProcCompByEmpresa ($id_Empresa);");
+        return $result;
+    }
 
 }
 

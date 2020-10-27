@@ -22,7 +22,7 @@ if ($opcion === "validarUsuario") {
         $_SESSION["Nivel_Usuario"] = $data->Nivel_Usuario;
         $_SESSION["id_Empleado"] = $data->id_Empleado;
         $_SESSION["Empleado"] = $data->Empleado;
-        $_SESSION["id_local"] = $data->id_local;
+        $_SESSION["id_local"] = $data->id_Local;
         $_SESSION["No_Local"] = $data->No_Local;
         $_SESSION["id_Empresa"] = $data->id_Empresa;
         $_SESSION["No_Empresa"] = $data->No_Empresa;
@@ -30,6 +30,10 @@ if ($opcion === "validarUsuario") {
     } else {
         echo json_encode($data);
     }
+}
+if ($opcion === "SalirSesion") {
+    session_start();
+    session_destroy();
 }
 
 //mysqli_close($conexion);

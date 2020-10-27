@@ -6,12 +6,10 @@ $Empresa = $EmpresaDAO->ListarEmpresa();
 <!doctype html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.min.css">
         <link rel="stylesheet" href="css/datatables.min.css">
         <link rel="stylesheet" href="css/fullcalendar.min.css">
@@ -130,7 +128,6 @@ $Empresa = $EmpresaDAO->ListarEmpresa();
             gtag('config', 'UA-118868344-1');
         </script>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({
                 google_ad_client: "ca-pub-4097235499795154",
@@ -182,20 +179,20 @@ $Empresa = $EmpresaDAO->ListarEmpresa();
                         data: $("#ingresar").serialize(),
                         success: function (response)
                         {
-                            
-                            if (response === "null" ||response === null||response === "") {
+
+                            if (response === "null" || response === null || response === "") {
                                 intentos++;
                                 $("#Aviso").empty();
                                 $("#Aviso").append("Es el intento nro " + intentos);
                                 document.getElementById('Aviso').style = "display:block;text-align:center;";
                                 document.getElementById('ValiInvalido').style = "display:block";
                             } else {
-                                 location.href = "Principal.php"
+                                location.href = "Principal.php"
                             }
                         }
                     });
                 }
-                function ValidarUsuario() { 
+                function ValidarUsuario() {
                     if (intentos === 2) {
                         var opcalert = confirm("Es el tercer intento, si Falla el Usuario se Bloqueara ¿Estas seguro de continuar?");
                         if (opcalert === true) {

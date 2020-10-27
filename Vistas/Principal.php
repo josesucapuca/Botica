@@ -3,7 +3,7 @@ session_start();
 if ($_SESSION["Usuario"] !== null) {
     ?>
     <!doctype html>
-    <html >
+    <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,7 +30,7 @@ if ($_SESSION["Usuario"] !== null) {
                             <a href="#" id="dd_user" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo "Nombre de usuario: " . $_SESSION["Empleado"]; ?></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd_user">
                                 <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Logout</a>
+                                <a onclick="salir()" class="dropdown-item">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -40,7 +40,7 @@ if ($_SESSION["Usuario"] !== null) {
             <div class="d-flex">
                 <div class="sidebar sidebar-dark bg-dark" style="position: -webkit-sticky;position: sticky;top: 0;">
                     <div style="padding: 15px;display:flex;align-items: center;">
-                        <img src="img/1.png" >
+                        <img src="img/logo.jpeg" style="max-width: 200px;">
                     </div>
                     <ul class="list-unstyled">
 
@@ -55,6 +55,8 @@ if ($_SESSION["Usuario"] !== null) {
                                     <li><a href="CRUD_Categorias.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Categorías de Productos</a></li>
                                     <li><a href="CRUD_Presentacion.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Presentacion de Productos</a></li>
                                     <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-angle-double-right"></i> Mantenimiento de Proveedor de Productos</a></li>
+                                    <li><a href="RegistrarPrecios_Producto.php" target="myframe"><i class="fa fa-angle-double-right"></i> Registrar Precios de Producto</a></li>
+                                    <li><a href="PapeleraProductos.php" target="myframe"><i class="fa fa-angle-double-right"></i> Productos Eliminados</a></li>
                                 </ul>
                             </li>
                             <li><a href="CRUD_Proveedor.php" target="myframe"><i class="fa fa-cubes"></i> Mantenimiento de Stock</a>
@@ -63,7 +65,20 @@ if ($_SESSION["Usuario"] !== null) {
                             <?php
                         }
                         ?>
-                        <li><a href="#"><i class="fa fa-users-cog"></i> Clientes </a></li>
+                        <?php
+                        if ($_SESSION["Nivel_Usuario"] === '1') {
+                            ?>
+                            <li><a href="CRUD_Cliente_Empresa.php" target="myframe"><i class="fa fa-users-cog"></i> Clientes de Empresa </a></li>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if ($_SESSION["Nivel_Usuario"] === '2') {
+                            ?>
+                            <li><a href="CRUD_Cliente_Local.php" target="myframe"><i class="fa fa-users-cog"></i> Clientes del Local </a></li>
+                            <?php
+                        }
+                        ?>
                         <?php
                         if ($_SESSION["Nivel_Usuario"] === '1') {
                             ?>
@@ -96,14 +111,14 @@ if ($_SESSION["Usuario"] !== null) {
                             <?php
                         }
                         ?>
-                        <li><a href="#"><i class="fa fa-archway"></i> Generar Compra </a></li>
-                        <li><a href="#"><i class="fa fa-archway"></i> Generar Venta </a></li>
-                        <li><a href="#"><i class="fa fa-archway"></i> Ver Stock de Productos </a></li>
+                        <li><a href="ProcesoCompra.php" target="myframe"><i class="fa fa-archway"></i> Generar Compra </a></li>
+                        <li><a href="ProcesoVenta.php" target="myframe"><i class="fa fa-archway"></i> Generar Venta </a></li>
+                        <li><a href="#" target="myframe"><i class="fa fa-archway"></i> Ver Stock de Productos </a></li>
                     </ul>
                 </div>
 
                 <div class="content p-4" style="    padding: 0px !important;">
-                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800px" frameborder="0"  style="background-color: #002752" src="Inicio.php"></iframe>
+                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="100%" frameborder="0"  style="background-color: #002752" src="Inicio.php"></iframe>
 
                 </div>
             </div>
@@ -114,6 +129,7 @@ if ($_SESSION["Usuario"] !== null) {
             <script src="js/moment.min.js"></script>
             <script src="js/fullcalendar.min.js"></script>
             <script src="js/bootadmin.min.js"></script>
+            <script src="js/Principal.js"></script>
 
         </body>
     </html>
@@ -122,7 +138,7 @@ if ($_SESSION["Usuario"] !== null) {
     ?>
     <script type="text/javascript">
 
-        location.href = "VistaLogueo.php"
+                                    location.href = "VistaLogueo.php"
 
     </script>
     <?php

@@ -30,7 +30,7 @@ if ($_SESSION["Usuario"] !== null) {
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal fade bd-example-modal-lg" id="ModalIngresarProveedor" tabindex="-1" role="dialog" aria-labelledby="ModalIngresarProveedorTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Ingresar Proveedor</h5>
@@ -153,7 +153,7 @@ if ($_SESSION["Usuario"] !== null) {
                 </div>
             </div>
             <div class="modal fade bd-example-modal-lg" id="ModalModificarProveedor" tabindex="-1" role="dialog" aria-labelledby="ModalModificarProveedorTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Modificar Proveedor</h5>
@@ -191,17 +191,6 @@ if ($_SESSION["Usuario"] !== null) {
                                     <input type="hidden" name="opc" value="ModificarProveedor">
                                     <input type="hidden" name="id_Pro" id="id_pro">
                                     <input type="hidden" name="UsuarioModificacion" value="<?php echo $_SESSION["id_Usuario"]; ?>">
-                                    <!--<div class="col-md-6 mb-3">
-                                        <div style="height: 20px"></div>
-                                        <div class="form-check">
-                                                                                   
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                            <label for="male">Activo</label><br>
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
-                                            <label for="female">Desactivo</label>
-                                        </div>
-                                    </div>-->
-
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3">
@@ -271,13 +260,13 @@ if ($_SESSION["Usuario"] !== null) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button id="btn_Enviar_Mod" type="button" class="btn btn-success">Modificar Cateogria</button>
+                            <button id="btn_Enviar_Mod" type="button" class="btn btn-success">Modificar Proveedor</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal fade" id="ModalInformacionProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Datos de Creacion y Modificación</h5>
@@ -302,15 +291,19 @@ if ($_SESSION["Usuario"] !== null) {
             <div class="d-flex">
 
                 <div class="content p-4">
-                    <div style="text-align: center">
-                        <h1 class="mb-4">PROVEEDORES</h1>
-                    </div>
+
 
                     <div class="card mb-4">
-                        <div class="content">
-                            <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#ModalIngresarProveedor">Ingresar Nuevo Proveedor</button>
-                        </div>
+
                         <div class="card-body">
+                            <div style="text-align: center">
+                                <h1 class="mb-4">PROVEEDORES</h1>
+                            </div>
+                            <div class="content">
+                                <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#ModalIngresarProveedor">Ingresar Nuevo Proveedor</button>
+                            </div>  
+                        </div>
+                        <div class="card-body" style="padding-top: 0px;">
                             <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 1px #b9bbbe;width: 100%;border-radius: 10px;">
                                 <thead>
                                     <tr>
@@ -328,7 +321,7 @@ if ($_SESSION["Usuario"] !== null) {
                                 </thead>
                                 <tbody >
                                     <?php
-                                    $i=0;
+                                    $i = 0;
                                     while ($dataProveedor = $Proveedor->fetch_object()) {
                                         $i++;
                                         ?>
@@ -366,9 +359,9 @@ if ($_SESSION["Usuario"] !== null) {
                                                 }
                                                 ?>
                                             </td>
-                                           
+
                                             <td>
-                                                <button onclick="enviar(<?php echo  $dataProveedor->id_Proveedor ?>)" class="btn btn-icon btn-pill btn-primary" data-toggle="modal" data-target="#ModalModificarProveedor" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
+                                                <button onclick="enviar(<?php echo $dataProveedor->id_Proveedor ?>)" class="btn btn-icon btn-pill btn-primary" data-toggle="modal" data-target="#ModalModificarProveedor" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
                                                 <?php
                                                 if ($dataProveedor->Es_Proveedor == 1) {
                                                     ?>
@@ -377,9 +370,9 @@ if ($_SESSION["Usuario"] !== null) {
                                                 } else {
                                                     ?>
                                                     <button onclick="ActivarProveedor(<?php echo $dataProveedor->id_Proveedor ?>,<?php echo $_SESSION["id_Usuario"]; ?>)" class="btn btn-icon btn-pill btn-success" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-check"></i></button>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                    <?php
+                                                }
+                                                ?>
                                             </td>
                                             <td><button onclick="DatProvee(<?php echo $dataProveedor->id_Proveedor ?>)"  class="btn btn-icon btn-pill btn-danger" data-toggle="modal" data-target="#ModalInformacionProducto" style="color: white"><i class="fa fa-fw fa-list"></i></button>
                                             </td>
@@ -404,15 +397,15 @@ if ($_SESSION["Usuario"] !== null) {
             <script src="js/Proveedor/Proveedor.js"></script>
             <script type="text/javascript">
 
-                                                        function enviar(id) {
-                                                            ModificarLlenarPro(id);
-                                                        }
+                                            function enviar(id) {
+                                                ModificarLlenarPro(id);
+                                            }
 
             </script>
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('#example').DataTable();
-                    ListarLocal(<?php echo $_SESSION["id_Empresa"]?>);
+                    ListarLocal(<?php echo $_SESSION["id_Empresa"] ?>);
                 });
             </script>
 
@@ -427,7 +420,6 @@ if ($_SESSION["Usuario"] !== null) {
                 gtag('config', 'UA-118868344-1');
             </script>
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({
                     google_ad_client: "ca-pub-4097235499795154",
@@ -442,7 +434,7 @@ if ($_SESSION["Usuario"] !== null) {
     </html>    <?php
 } else {
     ?><script type="text/javascript">
-        location.href = "VistaLogueo.php"
+            location.href = "VistaLogueo.php"
     </script><?php
 }
 ?>

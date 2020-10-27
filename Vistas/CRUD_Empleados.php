@@ -30,7 +30,7 @@ if ($_SESSION["Usuario"] !== null) {
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal fade bd-example-modal-lg" id="ModalIngresarEmpleado" tabindex="-1" role="dialog" aria-labelledby="ModalIngresarEmpleadoTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Ingresar Empleado</h5>
@@ -200,14 +200,14 @@ if ($_SESSION["Usuario"] !== null) {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button id="closemod" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="closemod" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button  id="btn_Enviar" type="button" class="btn btn-success">Agregar Empleado</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal fade bd-example-modal-lg" id="ModalModificarEmpleado" tabindex="-1" role="dialog" aria-labelledby="ModalModificarEmpleadoTitle" aria-hidden="true" >
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Modificar Empleado</h5>
@@ -388,7 +388,7 @@ if ($_SESSION["Usuario"] !== null) {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button id="btn_Enviar_Mod" type="button" class="btn btn-success">Modificar Empleado</button>
                         </div>
                     </div>
@@ -417,7 +417,7 @@ if ($_SESSION["Usuario"] !== null) {
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@ if ($_SESSION["Usuario"] !== null) {
                         <div class="content">
                             <button type="button" class="btn btn-success btn-lg btn-block" style="border: solid 2px #28a745" data-toggle="modal" data-target="#ModalIngresarEmpleado">Ingresar Nueva Empleados</button>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="padding-top: 0px;">
                             <table id="example" class="table table-hover" cellspacing="0" width="100%" style="border: solid 1px #b9bbbe;width: 100%;border-radius: 10px;">
                                 <thead>
                                     <tr>
@@ -574,7 +574,6 @@ if ($_SESSION["Usuario"] !== null) {
                 gtag('config', 'UA-118868344-1');
             </script>
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({
                     google_ad_client: "ca-pub-4097235499795154",

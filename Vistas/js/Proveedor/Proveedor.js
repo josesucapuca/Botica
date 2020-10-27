@@ -22,7 +22,7 @@ function ListarLocal(id) {
     $.ajax({
         type: "POST",
         url: '../Controlador/Local.php',
-        data: {opc: "ListarLocalByEmpresa",id:id},
+        data: {opc: "ListarLocalByEmpresa", id: id},
         success: function (response)
         {
             if (response === null || response === "") {
@@ -331,9 +331,13 @@ function DatProvee(id) {
                     $("#Empleado_Mod").empty();
                     $("#Usu_Creacion").append(jsonData[i].Usuario_Creacion);
                     $("#Empleado_Creacion").append(jsonData[i].Empleado_Creacion);
-
-                    $("#Usu_Mod").append(jsonData[i].Usuario_Modificacion);
-                    $("#Empleado_Mod").append(jsonData[i].Empleado_Modificacion);
+                    if (jsonData[i].Usuario_Modificacion !== null) {
+                        $("#Usu_Mod").append(jsonData[i].Usuario_Modificacion);
+                        $("#Empleado_Mod").append(jsonData[i].Empleado_Modificacion);
+                    } else {
+                        $("#Usu_Mod").append("Sin Modificaciones");
+                        $("#Empleado_Mod").append("Sin Modificaciones");
+                    }
                 }
                 //location.href = "CRUD_Categorias.php";
             }

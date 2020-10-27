@@ -23,8 +23,20 @@ if ($opcion === "ListarPresentacion") {
     }
     echo json_encode($arr);
 }
+if ($opcion === "ListarPresentacionByEmpresa") {
+    $id = $_POST["id"];
+    $consultda = "call ListaPresentacionByEmpresa($id);";
+    $var = mysqli_query($conexion, $consultda);
+    $arr = array();
+    if (mysqli_num_rows($var) != 0) {
+        while ($row = mysqli_fetch_assoc($var)) {
+            $arr[] = $row;
+        }
+    }
+    echo json_encode($arr);
+}
 if ($opcion === "ListarPresentacionbyid") {
-    
+
     $Preid = $_POST["id"];
     $consultda = "call ListaPresentacionById($Preid);";
     $var = mysqli_query($conexion, $consultda);
@@ -34,7 +46,7 @@ if ($opcion === "ListarPresentacionbyid") {
             $arr[] = $row;
         }
     }
-    
+
     echo json_encode($arr);
 }
 if ($opcion === "ModificarPresentacion") {

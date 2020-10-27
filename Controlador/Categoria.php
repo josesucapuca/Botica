@@ -4,18 +4,19 @@ include_once "../Factory/ConexionOperacion.php";
 $opcion = $_POST["opcCat"];
 
 if ($opcion === "IngresarCategoria") {
+    $id_Emp = $_POST["id_Empresa"];
     $Categoria = $_POST["Categoria"];
     $Estado_Categoria = $_POST["Estado_Categoria"];
     $Usuariocreacion = $_POST["Usuariocreacion"];
     //echo $Categoria.$Estado_Categoria.$Usuariocreacion;
-    $consultda = " call InsertarCategoria('$Categoria','$Estado_Categoria',$Usuariocreacion)";
+    $consultda = " call InsertarCategoria('$Categoria','$Estado_Categoria',$Usuariocreacion,$id_Emp)";
     $var = mysqli_query($conexion, $consultda);
     echo json_encode($var);
 }
-if ($opcion === "ListarCategoria") {
+if ($opcion === "ListarCategoriaByEmpresa") {
     //$consultda = "";
-
-    $var = $conexion->query("call ListaCategoria;");
+    $ids = $_POST["id"];
+    $var = $conexion->query("call ListaCategoriaByEmpresa($ids);");
     //$data = $var->fetch_object();
     $arr = array();
     if (mysqli_num_rows($var) != 0) {
